@@ -15,14 +15,17 @@ module.exports = function(app) {
       // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
       // It will do this by sending out the value "true" have a table
       // req.body is available since we're using the body parsing middleware
-      if (friendData.length < 5) {
-        tableData.push(req.body);
-        res.json(true);
-      }
-      else {
+
         friendData.push(req.body);
-        res.json(false);
-      }
+        res.json(true);
+  
     });
+
+    app.post("/api/clear", function(req, res) {
+        // Empty out the arrays of data
+        friendData.length = 0;
+    
+        res.json({ ok: true });
+      });
   };
   
